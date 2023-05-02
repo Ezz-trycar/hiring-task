@@ -26,7 +26,7 @@ export class UserService {
     const skip = query.skip || 0
     const keyword = query.keyword || ''
 
-    const [result, total] = await this.usersRepository.findAndCount({take: take,skip: 2 }
+    const [result, total] = await this.usersRepository.findAndCount({take: take,skip: skip }
     );
 
     return {

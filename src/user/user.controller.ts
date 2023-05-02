@@ -4,6 +4,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptors';
 import { UseInterceptors } from '@nestjs/common';
+import { ExceptionInterceptor } from 'src/interceptors/exception.interceptor';
+
+
+@UseInterceptors(SerializeInterceptor)
+@UseInterceptors(ExceptionInterceptor)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -18,7 +23,7 @@ export class UserController {
   findAll(@Query() query) {
     return this.userService.findAll(query);
   }
-@UseInterceptors(SerializeInterceptor)
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
